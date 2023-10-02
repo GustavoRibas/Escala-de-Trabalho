@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Funcionário</title>
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <style>
+		
+		/* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1C1C1C; /* Fundo da página */
+            padding: 20px;
+        }
+
+        /* Estilo para o cabeçalho da página */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #FEF4F4; /* Cor do texto do cabeçalho */
+        }
+
+        /* Estilo para o título médio */
+        .large-title {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #FEF4F4;
+        }
+
+        /* Estilo para os botões */
+        .btn-primary {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FEF4F4; /* Cor do texto do botão */
+        }
+
+        /* Estilo para a div que contém a tabela e as informações do dashboard */
+        .table-and-dashboard {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        /* Estilo para a tabela */
+        .table {
+            background-color: #FEF4F4; /* Cor de fundo da tabela */
+            border: 1px solid #FEF4F4; /* Borda da tabela */
+            border-radius: 5px;
+            flex: 1;
+            
+        }
+
+        /* Defina uma altura mínima para a div que contém o conteúdo do dashboard */
+        .card-body {
+            min-height: 400px; /* Ajuste conforme necessário */
+            background-color: #2E2828;
+            
+        }
+        
+        .btn-logout {
+            background-color: #503A3A; /* Cor de fundo do botão */
+            border-color: #000000; /* Cor da borda do botão */
+            color: #F6F6F6; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #fde4c3; /* Cor de fundo do botão no hover */
+            border-color: #503A3A; /* Cor da borda do botão no hover */
+        }
+	
+
+        /* Estilo para o formulário */
+        form {
+            background-color: #503A3A; /* Cor de fundo do formulário */
+            padding: 20px;
+            border: 1px solid #fde4c3; /* Borda do formulário */
+            border-radius: 5px;
+        }
+
+        /* Estilo para os campos do formulário */
+        .form-group label {
+            font-weight: bold;
+            color: #032539; /* Cor do texto do rótulo */
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 3px;
+        }
+
+        /* Estilo para o modal de confirmação */
+        .modal-content {
+            background-color: #FBF3F2; /* Cor de fundo do modal */
+        }
+
+        .modal-title {
+            color: #1C768F; /* Cor do título do modal */
+        }
+
+        .modal-body {
+            color: #032539; /* Cor do texto do corpo do modal */
+        }
+
+        /* Estilo para o rodapé do modal de confirmação */
+        .modal-footer {
+            background-color: #FBF3F2; /* Cor de fundo do rodapé do modal */
+        }
+
+        /* Estilo para o botão Fechar no modal de confirmação */
+        .modal-footer .btn-primary {
+            background-color: #503A3A; /* Cor de fundo do botão Fechar */
+            border-color: #000000; /* Cor da borda do botão Fechar */
+            color: #F6F6F6; /* Cor do texto do botão Fechar */
+        }
+        
+        .btn-logout {
+            background-color: #503A3A; /* Cor de fundo do botão */
+            border-color: #F6F6F6; /* Cor da borda do botão */
+            color: #F6F6F6; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #fde4c3; /* Cor de fundo do botão no hover */
+            border-color: #503A3A; /* Cor da borda do botão no hover */
+        }
+        
+        /* Estilo para o card personalizado */
+		.custom-card {
+		    border: 2px solid #503A3A; /* Cor da borda personalizada */
+		    background-color: #2E2828; /* Cor de fundo personalizada */
+		    border-radius: 5px;
+		}	
+    </style>
+	<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Opções como botões -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="large-title">Escala Cidadã</h1>
+                        <div class="list-group">
+                            <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+                            <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+                            <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+                            <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+                            <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+                            <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+                            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+       			 <h1>Cadastro de Funcionário</h1>
+                <form action="/employees/new" method="POST" enctype="application/json" class="mt-4">
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Cargo:</label>
+                        <input type="text" id="position" name="position" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">Telefone:</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Setor:</label>
+                        <input type="text" id="department" name="department" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="cadastroSucessoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Conteúdo do modal -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastro Realizado com Sucesso</h5>
+                </div>
+                <div class="modal-body">
+                    Seu cadastro foi realizado com sucesso.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap no final da página -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script para mostrar o modal após o cadastro -->
+    <script>
+        $(document).ready(function () {
+            // Verifique se o parâmetro "success" está na URL para determinar se o cadastro foi bem-sucedido
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('success')) {
+                $('#cadastroSucessoModal').modal('show');
+            }
+        });
+    </script>
+</body>
+</html>

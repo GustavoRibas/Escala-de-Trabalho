@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Work Schedule</title>
+    
+    <!-- Adicione a biblioteca jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<style>
+		/* Estilo para o corpo da página */
+			body {
+			    font-family: Arial, sans-serif;
+			    background-color: #FBF3F2; /* Fundo da página */
+			    padding: 20px;
+			}
+			
+			/* Estilo para o cabeçalho da página */
+			h1 {
+			    font-size: 24px;
+			    text-align: center;
+			    margin-top: 20px;
+			    margin-bottom: 20px;
+			    color: #032539; /* Cor do texto do cabeçalho */
+			}
+			
+			/* Estilo para os botões */
+			.btn-primary {
+			    background-color: #1C768F; /* Cor de fundo do botão */
+			    border-color: #1C768F; /* Cor da borda do botão */
+			}
+			
+			/* Estilo para o formulário */
+			form {
+			    background-color: #fff; /* Cor de fundo do formulário */
+			    padding: 20px;
+			    border: 1px solid #ddd; /* Borda do formulário */
+			    border-radius: 5px;
+			}
+			
+			/* Estilo para os campos do formulário */
+			.form-group label {
+			    font-weight: bold;
+			    color: #032539; /* Cor do texto do rótulo */
+			}
+			
+			.form-control {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			    border-radius: 3px;
+			}
+			
+			/* Estilo para o modal de sucesso */
+			.modal-content {
+			    background-color: #FBF3F2; /* Cor de fundo do modal */
+			}
+			
+			.modal-title {
+			    color: #1C768F; /* Cor do título do modal */
+			}
+			
+			.modal-body {
+			    color: #032539; /* Cor do texto do corpo do modal */
+			}
+			
+			/* Estilo para o rodapé */
+			.modal-footer {
+			    background-color: #FBF3F2; /* Cor de fundo do rodapé do modal */
+			}
+			
+			/* Estilo para o modal de sucesso - botão Fechar */
+			.modal-footer .btn-primary {
+			    background-color: #1C768F; /* Cor de fundo do botão Fechar */
+			    border-color: #1C768F; /* Cor da borda do botão Fechar */
+			}
+			
+			/* Estilo para os campos de seleção (select) */
+			select.form-control {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			    border-radius: 3px;
+			}
+			
+			/* Estilo para o campo de data (input type="date") */
+			input[type="date"].form-control {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			    border-radius: 3px;
+			}
+			
+			/* Estilo para o botão de cadastro */
+			button.btn-primary {
+			    margin-top: 20px;
+			    background-color: #1C768F;
+			    border-color: #1C768F;
+			    color: #FBF3F2; /* Cor do texto do botão de cadastro */
+			}
+			
+			 .btn-logout {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FFF; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #1C768F; /* Cor de fundo do botão no hover */
+            border-color: #1C768F; /* Cor da borda do botão no hover */
+        }	
+	</style>
+	<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Opções como botões -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="large-title">Escala Cidadã</h1>
+                        <div class="list-group">
+                            <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+                            <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+                            <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+                            <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+                            <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+                            <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+                            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-9">
+            <h1 class="mb-4">Cadastrar uma Escala de Trabalho</h1>
+            <form id="workScheduleForm" method="post" enctype="application/x-www-form-urlencoded">
+                <!-- Seus campos de formulário aqui -->
+                <div class="form-group">
+                    <label for="employeeId">Employee:</label>
+                    <select class="form-control" id="employeeId" name="employeeId" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="shiftId">Shift:</label>
+                    <select class="form-control" id="shiftId" name="shiftId" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Data:</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Cadastro Realizado com Sucesso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Seu cadastro foi realizado com sucesso.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap no final da página -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        function loadEmployees() {
+            $.ajax({
+                url: "/employees/api/employee",
+                method: "GET",
+                success: function(data) {
+                    $("#employeeId").empty();
+                    $.each(data, function(index, employee) {
+                        $("#employeeId").append("<option value='" + employee.id + "'>" + employee.name + "</option>");
+                    });
+                }
+            });
+        }
+
+        function loadShifts() {
+            $.ajax({
+                url: "/shifts/api/shifts",
+                method: "GET",
+                success: function(data) {
+                    $("#shiftId").empty();
+                    $.each(data, function(index, shift) {
+                        $("#shiftId").append("<option value='" + shift.id + "'>" + shift.name + "</option>");
+                    });
+                }
+            });
+        }
+
+        loadEmployees();
+        loadShifts();
+
+        $("#workScheduleForm").submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/work-schedules/create",
+                method: "POST",
+                data: $(this).serialize(),
+                success: function(data) {
+                    // Exiba o modal de sucesso
+                    $("#successModal").modal("show");
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert("Erro ao cadastrar: " + errorThrown);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

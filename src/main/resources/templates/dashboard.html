@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1C1C1C; /* Fundo da página */
+            padding: 20px;
+        }
+
+        /* Estilo para o cabeçalho da página */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #F6F6F6; /* Cor do texto do cabeçalho */
+        }
+
+        /* Estilo para o título médio */
+        .large-title {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #FEF4F4;
+        }
+
+        /* Estilo para os botões */
+        .btn-primary {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FEF4F4; /* Cor do texto do botão */
+        }
+
+        /* Estilo para a div que contém a tabela e as informações do dashboard */
+        .table-and-dashboard {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        /* Estilo para a tabela */
+        .table {
+            background-color: #FEF4F4; /* Cor de fundo da tabela */
+            border: 1px solid #FEF4F4; /* Borda da tabela */
+            border-radius: 5px;
+            flex: 1;
+            
+        }
+
+        /* Estilo para o painel de informações do dashboard */
+        .dashboard-panel {
+            background-color: #1C1C1C;
+            padding: 20px;
+            margin-left: 20px;
+            flex: 1;
+            
+        }
+
+        /* Defina uma altura mínima para a div que contém o conteúdo do dashboard */
+        .card-body {
+            min-height: 400px; /* Ajuste conforme necessário */
+            background-color: #2E2828;
+            
+        }
+
+        /* Estilo para os pequenos quadrados no dashboard */
+        .dashboard-data {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .dashboard-square {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background-color: #503A3A;
+            color: #F6F6F6;
+            border-radius: 5px;
+            margin-right: 10px; /* Espaço entre os quadrados */
+        }
+        
+        .btn-logout {
+            background-color: #503A3A; /* Cor de fundo do botão */
+            border-color: #000000; /* Cor da borda do botão */
+            color: #F6F6F6; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #fde4c3; /* Cor de fundo do botão no hover */
+            border-color: #503A3A; /* Cor da borda do botão no hover */
+        }
+        
+        /* Estilo para o card personalizado */
+		.custom-card {
+		    border: 2px solid #503A3A; /* Cor da borda personalizada */
+		    background-color: #2E2828; /* Cor de fundo personalizada */
+		    border-radius: 5px;
+		}		
+    </style>
+	</head>
+	<body>
+	    <div class="container mt-5">
+	        <div class="row">
+	            <div class="col-md-3">
+	    		<!-- Opções como botões -->
+			    <div class="card custom-card"> <!-- Adicione a classe custom-card aqui -->
+		        	<div class="card-body">						
+		            	<h1 class="large-title">Escala Cidadã</h1>
+		            	<div class="list-group">
+			                <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+			                <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+			                <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+			                <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+			                <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+			                <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+			            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    
+            <!-- Painel de Informações do Dashboard -->
+            <!-- Painel de Informações do Dashboard -->
+            <div class="col-md-9">
+            <div class="dashboard-panel">
+                <h1>Dashboard</h1>
+                <!-- Pequenos quadrados para exibir dados do dashboard -->
+                <div id="dashboard-data" class="dashboard-data">
+			    <!-- Quadrado 1: Quantidade total de funcionários -->
+			    <div class="dashboard-square">
+			        <h5>Funcionários Totais</h5>
+			        <p id="total-employees">Carregando...</p>
+			    </div>
+			
+			    <!-- Quadrado 2: Turno com mais escalas -->
+			    <div class="dashboard-square">
+			        <h5>Turno com Mais Escalas</h5>
+			        <p id="most-scheduled-shift">Carregando...</p>
+			    </div>
+			
+			    <!-- Quadrado 3: Dias com mais escalas -->
+			<div class="dashboard-square">
+			    <h5>Dia com Mais Escalas</h5>
+			    <p id="most-scheduled-day">Carregando...</p>
+			</div>
+						
+			    <!-- Quadrado 4: Funcionários com mais escalas -->
+			    <div class="dashboard-square">
+			        <h5>Funcionário com Mais Escalas</h5>
+			        <p id="most-scheduled-employee">Carregando...</p>
+			    </div>
+			</div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+			<script>
+			$(document).ready(function() {
+    // Faça uma solicitação AJAX para buscar os dados do dashboard
+		    $.ajax({
+		        url: '/api/dashboard/data', // Use a URL correspondente ao endpoint do controlador
+		        method: 'GET',
+		        success: function(data) {
+		            // Atualize os elementos HTML com os dados reais
+					$('#total-employees').text(data.totalEmployees);
+					$('#most-scheduled-shift').text(data.shiftWithMostSchedules.name);
+					$('#most-scheduled-day').text(data.dateWithMostSchedules);
+					$('#most-scheduled-employee').text(data.employeesWithMostSchedules);
+
+		        },
+		        error: function() {
+		            // Lide com erros de solicitação, se necessário
+		            $('#total-employees').text('Erro ao carregar os dados');
+		            $('#most-scheduled-shift').text('Erro ao carregar os dados');
+		            var rawData = data.dateWithMostSchedules;
+					var parts = rawData.split(","); // Divide a string usando a vírgula como separador
+					var date = parts[0]; // Obtém a primeira parte que é a data
+		            $('#most-scheduled-day').text('Erro ao carregar os dados');
+		            $('#most-scheduled-employee').text('Erro ao carregar os dados');
+		        }
+		    });
+		});
+			</script>
+    
+    <!-- Adicione os scripts do Bootstrap no final da página, se necessário -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

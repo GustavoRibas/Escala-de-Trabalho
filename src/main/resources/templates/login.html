@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala Cidadã</title>
+        
+    <style>
+		body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(29, 47, 44);
+    background: linear-gradient(270deg, rgba(29, 47, 44, 1) 0%, rgba(40, 51, 66, 1) 100%);
+}
+
+body h1 {
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.30);
+    font-weight: 500;
+    margin: 4rem;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 6rem;
+    padding: 25px;
+    width: 18.75rem;
+    height: 16.25rem;
+    background-color: #D9D9D9;
+    border-radius: 15px;
+}
+
+.login p {
+    margin-top: 2px;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login form label {
+    font-size: .8rem;
+}
+
+.login form div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login form a {
+    font-size: .625rem;
+    color: #03a9f5;
+}
+
+.login form input {
+    width: 100%;
+    border-radius: .63rem;
+    background-color: #d9d9d9;
+    border: 1px solid #000;
+    padding: 1px 10px;
+    margin: 2px 0 15px 0;
+}
+
+.login form input::placeholder {
+    font-size: .625rem;
+}
+
+.login form .btn {
+    width: 6.4rem;
+    height: 1.25rem;
+    padding: .125rem 1.75rem;
+    border-radius: .625rem;
+    border: none;
+    background-color: #283342;
+    color: #fff;
+    align-self: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+	</style>
+</head>
+
+<body>
+    <h1>Sistema de Escala de Trabalho</h1>
+
+    <div class="login">
+        <h3>Bem vindo de volta</h3>
+        <p>Insira suas credenciais</p>
+
+        <form th:action="@{/login}" method="post">
+            <label for="id">Usuario</label>
+            <input type="text" name="username" id="id" placeholder="Usuario">
+            <div>
+                <label for="pw">Senha</label>
+                <a th:href="@{/login/esqueciasenha}">Esqueci a senha</a>
+            </div>
+            <input type="password" name="password" id="pw" placeholder="Senha">
+
+            <button class="btn">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

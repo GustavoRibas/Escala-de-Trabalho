@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Turno</title>
+    
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<style>
+    /* Estilo para o corpo da página */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FBF3F2; /* Fundo da página */
+        padding: 20px;
+    }
+
+    /* Estilo para o cabeçalho da página */
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #032539; /* Cor do texto do cabeçalho */
+    }
+
+    /* Estilo para os botões */
+    .btn-primary {
+        background-color: #1C768F; /* Cor de fundo do botão */
+        border-color: #1C768F; /* Cor da borda do botão */
+    }
+
+    /* Estilo para o formulário */
+    form {
+        background-color: #fff; /* Cor de fundo do formulário */
+        padding: 20px;
+        border: 1px solid #ddd; /* Borda do formulário */
+        border-radius: 5px;
+    }
+
+    /* Estilo para os campos do formulário */
+    .form-group label {
+        font-weight: bold;
+        color: #032539; /* Cor do texto do rótulo */
+    }
+
+    .form-control {
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 3px;
+    }
+
+    /* Estilo para o modal de erro */
+    .alert-danger {
+        background-color: #F8D7DA; /* Cor de fundo do alerta de erro */
+        border-color: #FFC107; /* Cor da borda do alerta de erro */
+        color: #721C24; /* Cor do texto do alerta de erro */
+    }
+
+    /* Estilo para o modal de sucesso */
+    .modal-content {
+        background-color: #FBF3F2; /* Cor de fundo do modal */
+    }
+
+    .modal-title {
+        color: #1C768F; /* Cor do título do modal */
+    }
+
+    .modal-body {
+        color: #032539; /* Cor do texto do corpo do modal */
+    }
+
+    /* Estilo para o rodapé do modal de sucesso */
+    .modal-footer {
+        background-color: #FBF3F2; /* Cor de fundo do rodapé do modal */
+    }
+
+    /* Estilo para o botão Fechar no modal de sucesso */
+    .modal-footer .btn-primary {
+        background-color: #1C768F; /* Cor de fundo do botão Fechar */
+        border-color: #1C768F; /* Cor da borda do botão Fechar */
+        color: #FBF3F2; /* Cor do texto do botão Fechar */
+    }
+
+    /* Estilo para os campos de entrada (input) */
+    input[type="text"].form-control,
+    input[type="time"].form-control,
+    input[type="number"].form-control {
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 3px;
+    }
+
+    /* Estilo para o botão de cadastro */
+    button.btn-primary {
+        margin-top: 20px;
+        background-color: #1C768F;
+        border-color: #1C768F;
+        color: #FBF3F2; /* Cor do texto do botão de cadastro */       
+    }
+    
+    .btn-logout {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FFF; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #1C768F; /* Cor de fundo do botão no hover */
+            border-color: #1C768F; /* Cor da borda do botão no hover */
+        }
+</style>
+<div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Opções como botões -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="large-title">Escala Cidadã</h1>
+                        <div class="list-group">
+                            <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+                            <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+                            <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+                            <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+                            <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+                            <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+                            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Coluna para o conteúdo -->
+        <div class="col-md-9">
+            <h1 class="mb-4">Cadastrar Turno</h1>
+            <!-- Verifique o atributo "error" no modelo para exibir a mensagem de erro -->
+            <div th:if="${error}" class="alert alert-danger mt-4">
+                Erro ao cadastrar. Por favor, tente novamente.
+            </div>
+
+            <form action="/shifts/new" method="post"><div class="form-group">
+                <label for="name">Nome do turno:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="startTime">Hora de Início:</label>
+                <input type="time" id="startTime" name="startTime" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">Hora de Término:</label>
+                <input type="time" id="endTime" name="endTime" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duração (em horas):</label>
+                <input type="number" id="duration" name="duration" class="form-control" required>
+            </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Sucesso -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Cabeçalho do modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Cadastro Realizado com Sucesso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Corpo do modal -->
+            <div class="modal-body">
+                Seu cadastro foi realizado com sucesso.
+            </div>
+            <!-- Rodapé do modal -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Adicione os scripts do Bootstrap no final da página -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Exibir o modal de sucesso automaticamente se o atributo "success" estiver presente no modelo -->
+<script th:if="${success}">
+    $(document).ready(function () {
+        $('#successModal').modal('show');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Escalas de Trabalho</title>
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	
+	<style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1C1C1C; /* Fundo da página */
+            padding: 20px;
+        }
+
+        /* Estilo para o cabeçalho da página */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #FEF4F4; /* Cor do texto do cabeçalho */
+        }
+
+        /* Estilo para o título médio */
+        .large-title {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #FEF4F4;
+        }
+
+        /* Estilo para os botões */
+        .btn-primary {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FEF4F4; /* Cor do texto do botão */
+        }
+
+        /* Estilo para a div que contém a tabela e as informações do dashboard */
+        .table-and-dashboard {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        /* Estilo para a tabela */
+        .table {
+            background-color: #FEF4F4; /* Cor de fundo da tabela */
+            border: 1px solid #FEF4F4; /* Borda da tabela */
+            border-radius: 5px;
+            flex: 1;
+            
+        }
+
+        /* Defina uma altura mínima para a div que contém o conteúdo do dashboard */
+        .card-body {
+            min-height: 400px; /* Ajuste conforme necessário */
+            background-color: #2E2828;
+            
+        }
+        
+        .btn-logout {
+            background-color: #503A3A; /* Cor de fundo do botão */
+            border-color: #000000; /* Cor da borda do botão */
+            color: #F6F6F6; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #fde4c3; /* Cor de fundo do botão no hover */
+            border-color: #503A3A; /* Cor da borda do botão no hover */
+        }
+		
+		/* Estilo para a tabela */
+        .table {
+            background-color: #503A3A; /* Cor de fundo da tabela */
+            border-radius: 5px;
+        }
+
+        /* Estilo para as células da tabela */
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+            color: #F6F6F6; /* Cor do texto nas células de data */
+        }
+
+        /* Estilo para as células de data */
+        .date-cell {
+            background-color: #503A3A; /* Cor de fundo das células de data */
+            color: #F6F6F6; /* Cor do texto nas células de data */
+        }
+
+        /* Estilo para as células de funcionário */
+        .employee-cell {
+            background-color: #503A3A; /* Cor de fundo das células de funcionário */
+            color: #F6F6F6; /* Cor do texto nas células de funcionário */
+        }
+
+        /* Estilo para as células de cargo */
+        .position-cell {
+            background-color: #503A3A; /* Cor de fundo das células de cargo */
+            color: #F6F6F6; /* Cor do texto nas células de cargo */
+        }
+
+        /* Estilo para as células de turno */
+        .shift-cell {
+            background-color: #503A3A; /* Cor de fundo das células de turno */
+            color: #F6F6F6; /* Cor do texto nas células de turno */
+        }
+
+        /* Estilo para as células de setor */
+        .department-cell {
+            background-color: #503A3A; /* Cor de fundo das células de setor */
+            color: #F6F6F6; /* Cor do texto nas células de setor */
+        }	
+        
+        .btn-logout {
+            background-color: #503A3A; /* Cor de fundo do botão */
+            border-color: #000000; /* Cor da borda do botão */
+            color: #F6F6F6; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #fde4c3; /* Cor de fundo do botão no hover */
+            border-color: #503A3A; /* Cor da borda do botão no hover */
+        }
+        
+        /* Estilo para o card personalizado */
+		.custom-card {
+		    border: 2px solid #503A3A; /* Cor da borda personalizada */
+		    background-color: #2E2828; /* Cor de fundo personalizada */
+		    border-radius: 5px;
+		}	
+    </style>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Opções como botões -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="large-title">Escala Cidadã</h1>
+                        <div class="list-group">
+                            <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+                            <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+                            <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+                            <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+                            <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+                            <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+                            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1>Editar Escalas de Trabalho</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Funcionário</th>
+                            <th>Cargo</th>
+                            <th>Turno</th>
+                            <th>Setor</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="workSchedulesTableBody">
+                        <!-- Os dados das workschedules serão preenchidos aqui dinamicamente com JavaScript -->
+                    </tbody>
+		    <table class="table">
+			<h1>Editar Funcionário</h1>
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>Nome</th>
+		                <th>Cargo</th>
+		                <th>Email</th>
+		                <th>Número de Telefone</th>
+		                <th>Setor</th>
+		                <th>Ações</th>
+		            </tr>
+		        </thead>
+        <tbody id="employeesTableBody">
+            <!-- Os dados dos Employees serão preenchidos aqui dinamicamente com JavaScript -->
+            
+<table class="table">
+	            <h1>Editar Turnos de Trabalho</h1>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Hora de Início</th>
+            <th>Hora de Término</th>
+            <th>Duração</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody id="shiftsTableBody">
+        <!-- Os dados dos Turnos de Trabalho serão preenchidos aqui dinamicamente com JavaScript -->
+    </tbody>
+</table>
+        </tbody>
+    </table>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap no final da página, se necessário -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Função para preencher a tabela de Work Schedules com dados da sua aplicação
+        function fillWorkSchedulesTable() {
+            $.ajax({
+                url: '/work-schedules/api/workschedules', // Substitua pelo endpoint correto da sua aplicação
+                method: 'GET',
+                success: function(data) {
+                    const tbody = $('#workSchedulesTableBody');
+                    tbody.empty();
+
+                    data.forEach(workSchedule => {
+                        const row = `
+                            <tr id="workScheduleRow_${workSchedule.id}">
+                                <td>${workSchedule.id}</td>
+                                <td class="date-cell">${workSchedule.date}</td>
+                                <td class="employee-cell">${workSchedule.employee.name}</td>
+                                <td class="position-cell">${workSchedule.employee.position}</td>
+                                <td class="shift-cell">${workSchedule.shift.name}</td>
+                                <td class="department-cell">${workSchedule.employee.department}</td>
+                                <td>
+                                    <button class="btn btn-primary edit-button" onclick="editWorkSchedule(${workSchedule.id})">Editar</button>
+                                    <button class="btn btn-danger remove-button" onclick="removeWorkSchedule(${workSchedule.id})">Remover</button>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Erro ao carregar os dados das Work Schedules.');
+                }
+            });
+        }
+
+        // Função para editar uma Work Schedule pelo ID
+        function editWorkSchedule(id) {
+            // Encontre a linha da tabela correspondente ao ID
+            const row = $(`#workScheduleRow_${id}`);
+        
+            // Encontre os elementos da linha para edição
+            const dateCell = row.find('.date-cell');
+            const employeeCell = row.find('.employee-cell');
+            const positionCell = row.find('.position-cell');
+            const shiftCell = row.find('.shift-cell');
+            const departmentCell = row.find('.department-cell');
+            
+            // Crie campos de entrada para edição
+            const dateInput = $('<input type="text" class="form-control" value="' + dateCell.text() + '">');
+            const employeeInput = $('<input type="text" class="form-control" value="' + employeeCell.text() + '">');
+            const positionInput = $('<input type="text" class="form-control" value="' + positionCell.text() + '">');
+            const shiftInput = $('<input type="text" class="form-control" value="' + shiftCell.text() + '">');
+            const departmentInput = $('<input type="text" class="form-control" value="' + departmentCell.text() + '">');
+            
+            // Substitua os elementos de exibição pelos campos de entrada
+            dateCell.empty().append(dateInput);
+            employeeCell.empty().append(employeeInput);
+            positionCell.empty().append(positionInput);
+            shiftCell.empty().append(shiftInput);
+            departmentCell.empty().append(departmentInput);
+            
+            // Atualize o botão "Editar" para "Salvar" e adicione uma função para salvar as alterações
+            const editButton = row.find('.edit-button');
+            editButton.text('Salvar').attr('onclick', `saveWorkSchedule(${id})`);
+            
+            // Desabilite o botão "Remover" durante a edição
+            row.find('.remove-button').prop('disabled', true);
+        }
+
+        function saveWorkSchedule(id) {
+            // Encontre a linha da tabela correspondente ao ID
+            const row = $(`#workScheduleRow_${id}`);
+            
+            // Encontre os campos de entrada editados
+            const dateInput = row.find('.date-cell input');
+            const employeeInput = row.find('.employee-cell input');
+            const positionInput = row.find('.position-cell input');
+            const shiftInput = row.find('.shift-cell input');
+            const departmentInput = row.find('.department-cell input');
+            
+            // Obtenha os valores dos campos de entrada editados
+            const updatedDate = dateInput.val();
+            const updatedEmployee = employeeInput.val();
+            const updatedPosition = positionInput.val();
+            const updatedShift = shiftInput.val();
+            const updatedDepartment = departmentInput.val();
+            
+            // Atualize os campos de exibição com os valores editados
+            row.find('.date-cell').text(updatedDate);
+            row.find('.employee-cell').text(updatedEmployee);
+            row.find('.position-cell').text(updatedPosition);
+            row.find('.shift-cell').text(updatedShift);
+            row.find('.department-cell').text(updatedDepartment);
+            
+            // Atualize o botão "Salvar" para "Editar" e restaure a função de edição
+            const editButton = row.find('.edit-button');
+            editButton.text('Editar').attr('onclick', `editWorkSchedule(${id})`);
+            
+            // Habilite o botão "Remover" após a edição
+            row.find('.remove-button').prop('disabled', false);
+            
+            // Implemente a lógica para enviar os dados editados para o servidor e atualizar o banco de dados
+            // ...
+        }
+
+        // Função para remover uma Work Schedule pelo ID
+        function removeWorkSchedule(id) {
+            $.ajax({
+                url: '/work-schedules/api/workschedules/' + id,
+                method: 'DELETE',
+                success: function() {
+                    alert('Work Schedule removida com sucesso!');
+                    fillWorkSchedulesTable(); // Atualize a tabela após a remoção
+                },
+                error: function() {
+                    alert('Erro ao remover Work Schedule.');
+                }
+            });
+        }
+
+        // Chame a função para preencher a tabela quando a página carregar
+        $(document).ready(function() {
+            fillWorkSchedulesTable();
+        });
+        
+	        // Função para preencher a tabela de Work Schedules com dados da sua aplicação
+	function fillWorkSchedulesTable() {
+	    $.ajax({
+	        url: '/work-schedules/api/workschedules', // Substitua pelo endpoint correto da sua aplicação
+	        method: 'GET',
+	        success: function(data) {
+	            const tbody = $('#workSchedulesTableBody');
+	            tbody.empty();
+	
+	            data.forEach(workSchedule => {
+	                const row = `
+	                    <tr id="workScheduleRow_${workSchedule.id}">
+	                        <td>${workSchedule.id}</td>
+	                        <td class="date-cell">${workSchedule.date}</td>
+	                        <td class="employee-cell">${workSchedule.employee.name}</td>
+	                        <td class="position-cell">${workSchedule.employee.position}</td>
+	                        <td class="shift-cell">${workSchedule.shift.name}</td>
+	                        <td class="department-cell">${workSchedule.employee.department}</td>
+	                        <td>
+	                            <button class="btn btn-primary edit-button" onclick="editWorkSchedule(${workSchedule.id})">Editar</button>
+	                            <button class="btn btn-danger remove-button" onclick="removeWorkSchedule(${workSchedule.id})">Remover</button>
+	                        </td>
+	                    </tr>
+	                `;
+	                tbody.append(row);
+	            });
+	        },
+	        error: function() {
+	            alert('Erro ao carregar os dados das Work Schedules.');
+	        }
+	    });
+	}
+
+	// Função para editar uma Work Schedule pelo ID
+	function editWorkSchedule(id) {
+	    // Encontre a linha da tabela correspondente ao ID
+	    const row = $(`#workScheduleRow_${id}`);
+	
+	    // Encontre os elementos da linha para edição
+	    const dateCell = row.find('.date-cell');
+	    const employeeCell = row.find('.employee-cell');
+	    const positionCell = row.find('.position-cell');
+	    const shiftCell = row.find('.shift-cell');
+	    const departmentCell = row.find('.department-cell');
+	
+	    // Crie campos de entrada para edição
+	    const dateInput = $('<input type="text" class="form-control" value="' + dateCell.text() + '">');
+	
+	    // Substitua os elementos de exibição pelos campos de entrada
+	    dateCell.empty().append(dateInput);
+	
+	
+	    // Atualize o botão "Editar" para "Salvar" e adicione uma função para salvar as alterações
+	    const editButton = row.find('.edit-button');
+	    editButton.text('Salvar').attr('onclick', `saveWorkSchedule(${id})`);
+	
+	    // Desabilite o botão "Remover" durante a edição
+	    row.find('.remove-button').prop('disabled', true);
+	}
+
+	function saveWorkSchedule(id) {
+	    // Encontre a linha da tabela correspondente ao ID
+	    const row = $(`#workScheduleRow_${id}`);
+	
+	    // Encontre os campos de entrada editados
+	    const dateInput = row.find('.date-cell input');
+	
+	
+	    // Obtenha os valores dos campos de entrada editados
+	    const updatedDate = dateInput.val();
+	
+	
+	    // Atualize os campos de exibição com os valores editados
+	    dateCell.text(updatedDate);
+	
+	    // Atualize o botão "Salvar" para "Editar" e restaure a função de edição
+	    const editButton = row.find('.edit-button');
+	    editButton.text('Editar').attr('onclick', `editWorkSchedule(${id})`);
+	
+	    // Habilite o botão "Remover" após a edição
+	    row.find('.remove-button').prop('disabled', false);
+	
+	    // Implemente a lógica para enviar os dados editados para o servidor e atualizar o banco de dados
+	    // ...
+	}
+
+	// Função para remover uma Work Schedule pelo ID
+	function removeWorkSchedule(id) {
+	    $.ajax({
+	        url: '/work-schedules/api/workschedules/' + id,
+	        method: 'DELETE',
+	        success: function() {
+	            alert('Work Schedule removida com sucesso!');
+	            fillWorkSchedulesTable(); // Atualize a tabela após a remoção
+	        },
+	        error: function() {
+	            alert('Erro ao remover Work Schedule.');
+	        }
+	    });
+	}
+
+	// Função para preencher a tabela de Employees com dados da sua aplicação
+	function fillEmployeesTable() {
+	    $.ajax({
+	        url: '/employees/api/employee', // Substitua pelo endpoint correto da sua aplicação
+	        method: 'GET',
+	        success: function(data) {
+	            const tbody = $('#employeesTableBody');
+	            tbody.empty();
+	
+	            data.forEach(employee => {
+	                const row = `
+	                    <tr id="employeeRow_${employee.id}">
+	                        <td>${employee.id}</td>
+	                        <td>${employee.name}</td>
+	                        <td>${employee.position}</td>
+	                        <td>${employee.email}</td>
+	                        <td>${employee.phoneNumber}</td>
+	                        <td>${employee.department}</td>
+	                        <td>
+	                            <button class="btn btn-primary edit-button" onclick="editEmployee(${employee.id})">Editar</button>
+	                            <button class="btn btn-danger remove-button" onclick="removeEmployee(${employee.id})">Remover</button>
+	                        </td>
+	                    </tr>
+	                `;
+	                tbody.append(row);
+	            });
+	        },
+	        error: function() {
+	            alert('Erro ao carregar os dados dos Employees.');
+	        }
+	    });
+	}
+	
+	// Função para editar um Employee pelo ID
+	function editEmployee(id) {
+	    // Implemente a lógica para editar um Employee com base no ID
+	    // ...
+	}
+
+	// Função para remover um Employee pelo ID
+	function removeEmployee(id) {
+	    $.ajax({
+	        url: '/employees/' + id,
+	        method: 'DELETE',
+	        success: function() {
+	            alert('Employee removido com sucesso!');
+	            fillEmployeesTable(); // Atualize a tabela após a remoção
+	        },
+	        error: function() {
+	            alert('Erro ao remover Employee.');
+	        }
+	    });
+	}
+
+	// Chame as funções para preencher as tabelas quando a página carregar
+	$(document).ready(function() {
+	    fillWorkSchedulesTable();
+	    fillEmployeesTable();
+	});
+	
+	$(document).ready(function() {
+	    // Preencher a tabela quando a página carregar
+	    fillShiftsTable();
+	});
+
+	// Preencher a tabela de Shifts com dados do servidor
+	function fillShiftsTable() {
+	    $.ajax({
+	        url: '/shifts/api/shifts', // Substitua pelo endpoint correto da sua aplicação
+	        method: 'GET',
+	        success: function(data) {
+	            const tbody = $('#shiftsTableBody');
+	            tbody.empty();
+	
+	            data.forEach(shift => {
+	                const row = `
+	                    <tr id="shiftRow_${shift.id}">
+	                        <td>${shift.id}</td>
+	                        <td class="name-cell">${shift.name}</td>
+	                        <td class="startTime-cell">${shift.startTime}</td>
+	                        <td class="endTime-cell">${shift.endTime}</td>
+	                        <td class="duration-cell">${shift.duration}</td>
+	                        <td>
+	                            <button class="btn btn-primary edit-button" onclick="editShift(${shift.id})">Editar</button>
+	                            <button class="btn btn-danger remove-button" onclick="removeShift(${shift.id})">Remover</button>
+	                        </td>
+	                    </tr>
+	                `;
+	                tbody.append(row);
+	            });
+	        },
+	        error: function() {
+	            alert('Erro ao carregar os dados dos Shifts.');
+	        }
+	    });
+	}
+
+	// Editar um Shift pelo ID
+	function editShift(id) {
+	    const row = $(`#shiftRow_${id}`);
+	    const nameCell = row.find('.name-cell');
+	    const startTimeCell = row.find('.startTime-cell');
+	    const endTimeCell = row.find('.endTime-cell');
+	    const durationCell = row.find('.duration-cell');
+	    
+	    const currentName = nameCell.text();
+	    const currentStartTime = startTimeCell.text();
+	    const currentEndTime = endTimeCell.text();
+	    const currentDuration = durationCell.text();
+	
+	    // Substituir as células por campos de entrada
+	    const nameInput = $('<input type="text" class="form-control" value="' + currentName + '">');
+	    const startTimeInput = $('<input type="text" class="form-control" value="' + currentStartTime + '">');
+	    const endTimeInput = $('<input type="text" class="form-control" value="' + currentEndTime + '">');
+	    const durationInput = $('<input type="text" class="form-control" value="' + currentDuration + '">');
+	
+	    nameCell.empty().append(nameInput);
+	    startTimeCell.empty().append(startTimeInput);
+	    endTimeCell.empty().append(endTimeInput);
+	    durationCell.empty().append(durationInput);
+	    
+	    // Atualizar o botão de editar para salvar
+	    const editButton = row.find('.edit-button');
+	    editButton.text('Salvar').attr('onclick', `saveShift(${id})`);
+	    
+	    // Desabilitar o botão de remover durante a edição
+	    row.find('.remove-button').prop('disabled', true);
+	}
+
+	// Salvar as alterações de um Shift
+	function saveShift(id) {
+	    const row = $(`#shiftRow_${id}`);
+	    const nameInput = row.find('.name-cell input');
+	    const startTimeInput = row.find('.startTime-cell input');
+	    const endTimeInput = row.find('.endTime-cell input');
+	    const durationInput = row.find('.duration-cell input');
+	    
+	    const updatedName = nameInput.val();
+	    const updatedStartTime = startTimeInput.val();
+	    const updatedEndTime = endTimeInput.val();
+	    const updatedDuration = durationInput.val();
+
+    // Implementar a lógica para enviar os dados editados para o servidor
+    $.ajax({
+        url: '/shifts/api/shifts/' + id,
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            name: updatedName,
+            startTime: updatedStartTime,
+            endTime: updatedEndTime,
+            duration: updatedDuration
+            // Adicionar outros campos conforme necessário
+        }),
+        success: function(response) {
+            // Atualizar as células com os valores atualizados do servidor
+            nameInput.val(response.name);
+            startTimeInput.val(response.startTime);
+            endTimeInput.val(response.endTime);
+            durationInput.val(response.duration);
+            
+            // Atualizar o botão de editar de volta para "Editar"
+            const editButton = row.find('.edit-button');
+            editButton.text('Editar').attr('onclick', `editShift(${id})`);
+            
+            // Habilitar o botão de remover após a edição
+            row.find('.remove-button').prop('disabled', false);
+        },
+        error: function() {
+            alert('Erro ao salvar as alterações no Shift.');
+        }
+    });
+   }
+
+	// Remover um Shift pelo ID
+	function removeShift(id) {
+	    $.ajax({
+	        url: '/shifts/api/shifts/' + id,
+	        method: 'DELETE',
+	        success: function() {
+	            alert('Shift removido com sucesso!');
+	            fillShiftsTable(); // Atualizar a tabela após a remoção
+	        },
+	        error: function() {
+	            alert('Erro ao remover Shift.');
+	        }
+	    });
+	}
+
+    </script>
+</body>
+</html>

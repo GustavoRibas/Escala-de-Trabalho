@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Escalas de Trabalho</title>
+    <!-- Adicione as folhas de estilo do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FBF3F2; /* Fundo da página */
+            padding: 20px;
+        }
+
+        /* Estilo para o cabeçalho da página */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #032539; /* Cor do texto do cabeçalho */
+        }
+
+        /* Estilo para o título médio */
+        .medium-title {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo para os botões */
+        .btn-primary {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FBF3F2; /* Cor do texto do botão */
+        }
+
+        /* Estilo para a tabela */
+        .table {
+            background-color: #fff; /* Cor de fundo da tabela */
+            border: 1px solid #ddd; /* Borda da tabela */
+            border-radius: 5px;
+        }
+
+        /* Estilo para as células da tabela */
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Estilo para as células de data */
+        .date-cell {
+            background-color: #FA991C; /* Cor de fundo das células de data */
+            color: #FBF3F2; /* Cor do texto nas células de data */
+        }
+
+        /* Estilo para as células de funcionário */
+        .employee-cell {
+            background-color: #1C768F; /* Cor de fundo das células de funcionário */
+            color: #FBF3F2; /* Cor do texto nas células de funcionário */
+        }
+
+        /* Estilo para as células de cargo */
+        .position-cell {
+            background-color: #032539; /* Cor de fundo das células de cargo */
+            color: #FBF3F2; /* Cor do texto nas células de cargo */
+        }
+
+        /* Estilo para as células de turno */
+        .shift-cell {
+            background-color: #FBF3F2; /* Cor de fundo das células de turno */
+            color: #1C768F; /* Cor do texto nas células de turno */
+        }
+
+        /* Estilo para as células de setor */
+        .department-cell {
+            background-color: #032539; /* Cor de fundo das células de setor */
+            color: #FBF3F2; /* Cor do texto nas células de setor */
+        }
+
+        /* Defina uma altura mínima para a div que contém a lista de Escala Cidadã */
+        .card-body {
+            min-height: 400px; /* Ajuste conforme necessário */
+        }
+        
+        .btn-logout {
+            background-color: #1C768F; /* Cor de fundo do botão */
+            border-color: #1C768F; /* Cor da borda do botão */
+            color: #FFF; /* Cor do texto do botão */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background-color: #1C768F; /* Cor de fundo do botão no hover */
+            border-color: #1C768F; /* Cor da borda do botão no hover */
+        }
+    </style>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Opções como botões -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="large-title">Escala Cidadã</h1>
+                        <div class="list-group">
+                            <a href="/dashboard" class="btn btn-logout btn-block mb-2">Dashboard</a>
+                            <a href="/new-employee" class="btn btn-logout btn-block mb-2">Cadastrar Funcionário</a>
+                            <a href="/new-shift" class="btn btn-logout btn-block mb-2">Cadastrar Turno</a>
+                            <a href="/new-workschedule" class="btn btn-logout btn-block mb-2">Cadastrar Escala de Trabalho</a>
+                            <a href="/edit-workschedule" class="btn btn-logout btn-block mb-2">Area Admin</a>
+                            <a href="/workscheduleList" class="btn btn-logout btn-block mb-2">Listagem das Escalas de Trabalho</a>
+                            <a href="/logout" class="btn btn-logout btn-block">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1>Listagem de Escalas de Trabalho</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Funcionário</th>
+                            <th>Cargo</th>
+                            <th>Turno</th>
+                            <th>Setor</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="workSchedulesTableBody">
+                        <!-- Os dados das workschedules serão preenchidos aqui dinamicamente com JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Adicione os scripts do Bootstrap no final da página, se necessário -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Função para preencher a tabela de Work Schedules com dados da sua aplicação
+        function fillWorkSchedulesTable() {
+            $.ajax({
+                url: '/work-schedules/api/workschedules', // Substitua pelo endpoint correto da sua aplicação
+                method: 'GET',
+                success: function(data) {
+                    const tbody = $('#workSchedulesTableBody');
+                    tbody.empty();
+
+                    data.forEach(workSchedule => {
+                        const row = `
+                            <tr>
+                                <td>${workSchedule.id}</td>
+                                <td>${workSchedule.date}</td>
+                                <td>${workSchedule.employee.name}</td>
+                                <td>${workSchedule.employee.position}</td>
+                                <td>${workSchedule.shift.name}</td>
+                                <td>${workSchedule.employee.department}</td>                            
+                            </tr>
+                        `;
+                        tbody.append(row);
+                    });
+                },
+                error: function() {
+                    alert('Erro ao carregar os dados das Work Schedules.');
+                }
+            });
+        }
+
+        // Chame a função para preencher a tabela quando a página carregar
+        $(document).ready(function() {
+            fillWorkSchedulesTable();
+        });
+        
+        
+    </script>
+</body>
+</html>
